@@ -3,24 +3,25 @@
 - [Log](#log)
 - [Status](#status)
 - [Pull](#pull)
-  - [Pull with rebase](#pull-with-rebase)
+    - [Pull with rebase](#pull-with-rebase)
 - [Commit](#commit)
-  - [Revert](#revert-commit)
-  - [Checkout](#checkout-to-commit)
+    - [Revert](#revert-commit)
+    - [Checkout](#checkout-to-commit)
 - [Rebasing](#rebasing)
-  - [Abort](#abort-rebase)
+    - [Abort](#abort-rebase)
 - [Interactive rebase](#interactive-rebase)
 - [Diff](#diff)
 - [Stash](#stash)
-  - [Save](#save)
-  - [List](#list)
-  - [Apply](#apply)
-  - [Drop](#drop)
-  - [Pop](#pop)
-  - [Clear](#clear)
+    - [Save](#save)
+    - [List](#list)
+    - [Apply](#apply)
+    - [Drop](#drop)
+    - [Pop](#pop)
+    - [Clear](#clear)
 - [Push](#push)
-  - [Push with rebase](#push-with-rebase)
-
+    - [Push with rebase](#push-with-rebase)
+- [Tag](#tag)
+    - [Describe](#describe)
 
 ---
 <div id='log'/>
@@ -30,6 +31,7 @@
 ```cmd
 git log
 ```
+
 Show the commits history and some details.list
 
 ---
@@ -42,6 +44,7 @@ Show the commits history and some details.list
 git pull
 git pull --merge
 ```
+
 If you pull remote changes with the flag --merge, which is also the default, then your local changes are merged with the
 remote changes. This results in a merge commit that points to the latest local commit and the latest remote commit.
 
@@ -54,6 +57,7 @@ remote changes. This results in a merge commit that points to the latest local c
 ```cmd
 git pull --rebase
 ```
+
 If you pull remote changes with the flag --rebase, then your local changes are reapplied on top of the remote changes.
 
 ---
@@ -65,6 +69,7 @@ If you pull remote changes with the flag --rebase, then your local changes are r
 ```cmd
 git commit -m <"add commit message here..">
 ```
+
 Do a commit.
 
 ---
@@ -73,6 +78,7 @@ Do a commit.
 git commit -m <"add commit message here.."> --no-verify
 git fcommit -m <"add commit message here..">
 ```
+
 The flag --no-verify Avoid pre-commit checks.
 
 ---
@@ -84,6 +90,7 @@ The flag --no-verify Avoid pre-commit checks.
 ```cmd
 git revert <hash-commit>
 ```
+
 Remove a specific commit.
 
 ---
@@ -95,6 +102,7 @@ Remove a specific commit.
 ```cmd
 git checkout <hash-commit>
 ```
+
 Switch to specific commit.
 
 ---
@@ -106,6 +114,7 @@ Switch to specific commit.
 ```cmd
 git rebase -i HEAD~<number_of_commits_to_show>
 ```
+
 Interactive functionality for managing of the commit.
 
 ![Alt text](./assets/rebase_interactive_mode.JPG)
@@ -118,6 +127,7 @@ Interactive functionality for managing of the commit.
 ```cmd
 git reset --hard ORIG_HEAD
 ```
+
 5) for revert a rebase.
 
 ---
@@ -130,6 +140,7 @@ git reset --hard ORIG_HEAD
 git rebase <name_branch>
 git rebase <remote_name> <name_branch>
 ```
+
 wip..
 
 ---
@@ -141,6 +152,7 @@ wip..
 ```cmd
 git rebase --abort
 ```
+
 Cancel rebase.
 
 ---
@@ -152,6 +164,7 @@ Cancel rebase.
 ```cmd
 git diff
 ```
+
 Show the eventually modifications.
 
 ---
@@ -164,6 +177,7 @@ Show the eventually modifications.
 git stash
 git stash push
 ```
+
 Save the local changes, reporting the state of the branch to the state of the HEAD commit.
 
 ---
@@ -175,6 +189,7 @@ Save the local changes, reporting the state of the branch to the state of the HE
 ```cmd
 git stash save <"add a stash message here..">
 ```
+
 Create a stash with a specific message.
 
 ---
@@ -186,12 +201,14 @@ Create a stash with a specific message.
 ```cmd
 git stash list
 ```
+
 Show the list of stashes. Example of result:
 
 ```cmd
 output:
 stash@{0}: On Nome_Branch: Messaggio..
 ```
+
 {0} show the index assign to the specific stash
 
 ---
@@ -203,12 +220,13 @@ stash@{0}: On Nome_Branch: Messaggio..
 ```cmd
 git stash apply <stash@{0}>
 ```
-Get a specific stash by index (stash@{0}).
-NB. this stash won't delete.
+
+Get a specific stash by index (stash@{0}). NB. this stash won't delete.
 
 ```cmd
 git checkout -- .
 ```
+
 Remove the modification of the last stash applied.
 
 ---
@@ -220,8 +238,8 @@ Remove the modification of the last stash applied.
 ```cmd
 git stash drop <stash@{0}>
 ```
-Remove a specific stash from index (stash@{0}).
-NB. this command removes the stash without applying the changes.
+
+Remove a specific stash from index (stash@{0}). NB. this command removes the stash without applying the changes.
 
 ---
 
@@ -232,12 +250,14 @@ NB. this command removes the stash without applying the changes.
 ```cmd
 git stash pop
 ```
+
 Remove the stash at TOP position of the list. ({0})
 NB. this command removes the stash applying the changes.
 
 ```cmd
 git stash pop <stash@{0}>
 ```
+
 Remove the specific stash from index, applying the modifications.
 
 ---
@@ -249,6 +269,7 @@ Remove the specific stash from index, applying the modifications.
 ```cmd
 git stash clear
 ```
+
 Remove all the stashes
 
 ---
@@ -260,6 +281,7 @@ Remove all the stashes
 ```cmd
 git push
 ```
+
 Send the modifications in the repository.
 
 ---
@@ -271,7 +293,34 @@ Send the modifications in the repository.
 ```cmd
 git push --force-with-lease
 ```
-Send the modifications in the repository, without overwrite any work on the remote branch if more commits were added to the remote branch.
-maintaining a linear history.
+
+Send the modifications in the repository, without overwrite any work on the remote branch if more commits were added to
+the remote branch. maintaining a linear history.
+
+---
+
+<div id='tag'/>
+
+### Switch to Tag
+
+```cmd
+git checkout <name_tag> 
+
+exapmle: git checkout 1.0.12 
+```
+
+Move to specific Tag.
+
+---
+
+<div id='describe'/>
+
+### Describe
+
+```cmd
+git describe --tags 
+```
+
+Move to specific Tag.
 
 ---
